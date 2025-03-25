@@ -16,7 +16,7 @@ This project aims at providing a high level use case of a configuration-driven d
 ## Flow Chart of the overall process
 ![alt text](img/flowchart.png)
 
-## Steps involved in the 
+## Steps involved in the overall process
 - Step1: Config file
   - Define the source path of the data to be read
   - Define the Schema for the data
