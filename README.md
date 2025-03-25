@@ -14,7 +14,7 @@ This project aims at providing a high level use case of a configuration-driven d
 - Provide Actionable Alerts on data quality issues and failures.
 
 ## Flow Chart of the overall process
-![alt text](img/flowchart.png)
+![alt text](img/lat.png)
 
 ## Steps involved in the overall process
 - Step1: Config file
