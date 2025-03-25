@@ -21,13 +21,12 @@ This project aims at providing a high level use case of a configuration-driven d
   - Define the source path of the data to be read
   - Define the Schema for the data
   - Define the rules and checks to run and the columns to run them on
-  - ## Example Configuration File (JSON Format)
+## Example Configuration File (JSON Format)
 This framework is driven by a JSON configuration file, allowing users to define data quality rules dynamically.
 
 ```json
 {
-  "dataset": "customer_data",
-  "source_path": "s3://ilum-data/customers/",
+  "source_path": "mention the source path here",
   "format": "parquet",
   "checks": [
     {
@@ -53,13 +52,25 @@ This framework is driven by a JSON configuration file, allowing users to define 
   "thresholds": {
     "max_null_percent": 5,
     "min_completeness": 0.95
-  },
-  "alerts": {
-    "type": "email",
-    "recipients": ["data-team@company.com"]
   }
 }
 ```
 
 
-- Step2: 
+- Step2: Spark code
+  - Parse the config and read the data from the source path
+  - create dataframe out of the source data
+  - run the checks defined in the config on the dataset
+  - write the resulting dataframe back to the datalake
+  - Check the status of checks after processing, if any of the checks failed, do a hard exit from the code
+    
+-Step3: Orchestration, Alerting & Analysis
+  - Schedule the data quality job using any orchestration tool such as Azkaban or Airflow
+  - Based based on the code status, the job will fail/succeed
+  - integrate slack alert/email alert mechanism to send alerts in case of jobn failure
+  - Use any serverless query engine such as Athena or Presto to query and analyse the data quality checks result stored in the lakehouse
+
+# Why this is awesome?
+- Completly config driven - plug and play type of approach wherein the users only need to pass the config with the necessary info and the code written in the backend to do all the processing and parsing will take care of the rest
+- Highly Scalable with Spark
+- Combines default checks with custom user-defined checks
