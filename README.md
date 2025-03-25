@@ -60,18 +60,19 @@ This framework is driven by a JSON configuration file, allowing users to define 
 - Step2: Spark code
   - Create different classes to handle different functionalities such as config parser to parse the config, dataloader to load the data and store the results back to lakehouse, DQ class to run the checks and the main class to handle the       pass and failure cases
   - Parse the config and read the data from the source path
-  - create dataframe out of the source data
-  - run the checks defined in the config on the dataset
-  - write the resulting dataframe back to the datalake
+  - Create dataframe out of the source data
+  - Run the checks defined in the config on the dataset
+  - Write the resulting dataframe back to the datalake
   - Check the status of checks after processing, if any of the checks failed, do a hard exit from the code
     
 - Step3: Orchestration, Alerting & Analysis
   - Schedule the data quality job using any orchestration tool such as Azkaban or Airflow
-  - Based based on the code status, the job will fail/succeed
-  - integrate slack alert/email alert mechanism to send alerts in case of jobn failure
+  - Based on the code status, the job will fail/succeed
+  - Integrate slack alert/email alert mechanism to send alerts in case of job failure
   - Use any serverless query engine such as Athena or Presto to query and analyse the data quality checks result stored in the lakehouse
 
 # Why this is awesome?
-- Completly config driven - plug and play type of approach wherein the users only need to pass the config with the necessary info and the code written in the backend to do all the processing and parsing will take care of the rest
+- Completly config driven - plug and play type of approach wherein the users only need to pass the config with the necessary info and the code written in the backend will do all the processing and parsing
 - Highly Scalable with Spark
 - Combines default checks with custom user-defined checks
+- Maintains data intergrity and quality for the downstream systems consumption
